@@ -48,7 +48,11 @@ cp .env.example .env
 
 PORT=3000
 
-// Cloudinary (Optional - for cloud uploads)
+//MongoDB
+
+MONGODB_URL=your-Database_connection
+
+// Cloudinary 
 
 CLOUDINARY_CLOUD_NAME=your_cloud_name
 
@@ -229,4 +233,4 @@ Open your browser
 
 
 ## Author
-**Eng.Alaa Soufi** 
+**Eng.Alaa Soufi** ❤️
