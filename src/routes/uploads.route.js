@@ -4,6 +4,7 @@ const router = express.Router();
 const UploadController = require("../controllers/uploads.controller");
 const asyncHandler =  require("../utils/asyncHandler")
 const uploadLocal = require("../middlewares/multer");
+const uploadCloud = require("../middlwares/multer");
 const multer = require("multer")
 
 router.post("/local" ,
@@ -11,9 +12,9 @@ router.post("/local" ,
     asyncHandler(UploadController.local)
 )
 
-router.post("/external",
-    [multer.single("file")],
-    asyncHandler(UploadController.external)
+router.post("/cloud",
+    [uploadCloud.single("file")],
+    asyncHandler(UploadController.cloud)
 )
 
 module.exports = router;

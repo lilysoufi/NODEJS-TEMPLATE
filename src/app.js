@@ -42,6 +42,7 @@ const MONGODB_URL = process.env.MONGODB_URL;
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
+const socketHandler = require('./socket');
 
 mongoose.connect(MONGODB_URL)
     .then(() => {
@@ -54,7 +55,11 @@ mongoose.connect(MONGODB_URL)
         console.log('Error MONGODB', err.message);
     })
 
-io.on("connection", (socket) => {
+    
+    /*socketHandler(io);*/
+
+
+/*io.on("connection", (socket) => {
     console.log("New client connected", socket.id);
 
     socket.on("disconnect", () => {
@@ -65,8 +70,8 @@ io.on("connection", (socket) => {
         console.log("New message received:", data);
     });
 });
-
-/* connectDB();*/
+*/
+ connectDB();
 
 
 

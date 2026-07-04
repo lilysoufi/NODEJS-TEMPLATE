@@ -12,7 +12,7 @@ const UploadController {
         return res.status(200).json({ message : "This is the path" , file , path :filePath })
      },
 
-     external = async (req , res) {
+     cloud = async (req , res) {
         const file = req.file;
         
          if(!file) {

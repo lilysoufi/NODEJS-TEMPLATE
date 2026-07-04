@@ -8,17 +8,33 @@ const UserSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: true,
+        //required: true,
         unique: true,
     },
     password: {
         type: String,
-        required: true,
+        //required: true,
+    },
+    socketId: {
+        type: String,
+        default: null
+    },
+    currentRoom: {
+        type: String,
+        default: 'general'
     },
     role: {
         type: String,
         enum: ['user', 'admin'],
         default: 'user',
+    },
+        isOnline: {
+        type: Boolean,
+        default: false
+    },
+    lastSeen: {
+        type: Date,
+        default: Date.now
     },
 }, { timestamps: true });
 

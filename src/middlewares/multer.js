@@ -36,13 +36,45 @@ const storage = multer.diskStorage({
     },
 });
 
+// File filter for security
+const fileFilter = (req, file, cb) => {
+    // Check file types
+    if (file.mimetype.startsWith('image/')) {
+        const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+        if (allowedTypes.includes(file.mimetype)) {
+            cb(null, true);
+        } else {
+            cb(new Error('Only JPEG, PNG, GIF, and WebP images are allowed'), false);
+        }
+    } else if (file.mimetype.startsWith('application/')) {
+        const allowedDocs = ['application/pdf', 'application/msword'];
+        if (allowedDocs.includes(file.mimetype)) {
+            cb(null, true);
+        } else {
+            cb(new Error('Only PDF and DOC files are allowed'), false);
+        }
+    } else {
+        cb(new Error('Unsupported file type'), false);
+    }
+};
+
 const uploadLocal = multer({
     storage,
-    /* fileFilter, */
+    fileFilter : fileFilter,
     limits: {
         files: 5,
         fileSize: 5 * 1024 * 1024 // 5MB
     }
-})
+});
 
-module.exports = uploadLocal
+// Multer configuration for Cloudinary
+const uploadCloud = multer({
+    storage: cloudStorage,
+    fileFilter: fileFilter,
+    limits: {
+        fileSize: 5 * 1024 * 1024,
+        files: 5
+    }
+});
+
+module.exports = uploadLocal , uploadCloud;
